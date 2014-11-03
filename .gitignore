@@ -1,0 +1,10 @@
+.idea
+uip-test.iml
+doc/*
+target
+/
+.settings
+/
+.classpath
+
+.project
