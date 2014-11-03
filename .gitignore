@@ -1,10 +1,7 @@
 .idea
-uip-test.iml
+*.iml
 doc/*
 target
-/
 .settings
-/
 .classpath
-
 .project
