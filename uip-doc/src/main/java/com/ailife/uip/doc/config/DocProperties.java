@@ -11,23 +11,16 @@ import javax.annotation.PostConstruct;
 @ConfigurationProperties(prefix = DocAutoConfiguration.CONFIGURATION_PREFIX)
 public class DocProperties {
 
-	private String code;
 	private String rootParamPath;
 	private String requestParamPath;
 	private String responseParamPath;
-	private String docPath;
+	private String docName;
+	private String docVersion;
+	private SVN svn;
 
 	@PostConstruct
 	public void log() {
 		LogUtil.debug(this.getClass(), "Initial Doc Properties." + this.toString());
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
 	}
 
 	public String getRootParamPath() {
@@ -54,22 +47,83 @@ public class DocProperties {
 		this.responseParamPath = responseParamPath;
 	}
 
-	public String getDocPath() {
-		return docPath;
+	public String getDocName() {
+		return docName;
 	}
 
-	public void setDocPath(String docPath) {
-		this.docPath = docPath;
+	public void setDocName(String docName) {
+		this.docName = docName;
+	}
+
+	public String getDocVersion() {
+		return docVersion;
+	}
+
+	public void setDocVersion(String docVersion) {
+		this.docVersion = docVersion;
+	}
+
+	public SVN getSvn() {
+		return svn;
+	}
+
+	public void setSvn(SVN svn) {
+		this.svn = svn;
 	}
 
 	@Override
 	public String toString() {
-		return "DocProperties{" +
-				"code='" + code + '\'' +
-				", rootParamPath='" + rootParamPath + '\'' +
-				", requestParamPath='" + requestParamPath + '\'' +
-				", responseParamPath='" + responseParamPath + '\'' +
-				", docPath='" + docPath + '\'' +
-				'}';
+		final StringBuilder sb = new StringBuilder("DocProperties{");
+		sb.append("rootParamPath='").append(rootParamPath).append('\'');
+		sb.append(", requestParamPath='").append(requestParamPath).append('\'');
+		sb.append(", responseParamPath='").append(responseParamPath).append('\'');
+		sb.append(", docName='").append(docName).append('\'');
+		sb.append(", docVersion='").append(docVersion).append('\'');
+		sb.append(", svn=").append(svn);
+		sb.append('}');
+		return sb.toString();
 	}
+
+	public static class SVN {
+
+		private String name = "chenmm6";
+		private String password = "123456";
+		private String url;
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getPassword() {
+			return password;
+		}
+
+		public void setPassword(String password) {
+			this.password = password;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+
+		@Override
+		public String
+		toString() {
+			final StringBuilder sb = new StringBuilder("SVN{");
+			sb.append("name='").append(name).append('\'');
+			sb.append(", password='").append(password).append('\'');
+			sb.append(", url='").append(url).append('\'');
+			sb.append('}');
+			return sb.toString();
+		}
+	}
+
 }

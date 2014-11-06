@@ -5,6 +5,8 @@ import com.ailife.uip.core.entity.Inter;
 import com.ailife.uip.core.entity.Param;
 import com.ailife.uip.core.util.FileUtil;
 import com.ailife.uip.core.util.TikaUtil;
+import com.ailife.uip.doc.svn.IDocService;
+import com.ailife.uip.doc.util.ID;
 import com.ailife.uip.doc.util.JsoupUtil;
 import com.alibaba.fastjson.JSONReader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,33 +30,45 @@ public class DocInitializer {
 	@Autowired
 	private ConfigurableApplicationContext applicationContext;
 
+	@Autowired
+	private IDocService docService;
+
 
 	@PostConstruct
 	protected void initialize() throws Exception {
+		checkoutDoc();
 		initialPublicParams();
 		initialDocument();
 	}
 
+	private void checkoutDoc() {
+		//Checkout document from svn.
+		boolean doCheckout = false;
+		if(doCheckout) {
+			docService.checkoutDoc();
+		}
+	}
+
 	private void initialDocument() {
-		InputStream inputStream = FileUtil.loadProjectFile(docProperties.getDocPath());
-		List<Inter> interList = JsoupUtil.parseHtml(TikaUtil.parse(inputStream));
+//		InputStream inputStream = FileUtil.loadProjectFile(docProperties.getDocPath());
+//		List<Inter> interList = JsoupUtil.parseHtml(TikaUtil.parse(inputStream));
 	}
 
 	private void initialPublicParams() {
-		String rootValue = StaticDataUtil.getStaticDataValue(DATATYPE.PUBLIC_PARAM.toString(), "ROOT");
-		if (!paramService.isPublicParamInitial(rootValue)) {
-			paramService.batchSave(getParams(docProperties.getRootParamPath()));
-		}
-
-		String requestValue = StaticDataUtil.getStaticDataValue(DATATYPE.PUBLIC_PARAM.toString(), "REQUEST");
-		if (!paramService.isPublicParamInitial(requestValue)) {
-			paramService.batchSave(getParams(docProperties.getRequestParamPath()));
-		}
-
-		String responseValue = StaticDataUtil.getStaticDataValue(DATATYPE.PUBLIC_PARAM.toString(), "RESPONSE");
-		if (!paramService.isPublicParamInitial(responseValue)) {
-			paramService.batchSave(getParams(docProperties.getResponseParamPath()));
-		}
+//		String rootValue = StaticDataUtil.getStaticDataValue(DATATYPE.PUBLIC_PARAM.toString(), "ROOT");
+//		if (!paramService.isPublicParamInitial(rootValue)) {
+//			paramService.batchSave(getParams(docProperties.getRootParamPath()));
+//		}
+//
+//		String requestValue = StaticDataUtil.getStaticDataValue(DATATYPE.PUBLIC_PARAM.toString(), "REQUEST");
+//		if (!paramService.isPublicParamInitial(requestValue)) {
+//			paramService.batchSave(getParams(docProperties.getRequestParamPath()));
+//		}
+//
+//		String responseValue = StaticDataUtil.getStaticDataValue(DATATYPE.PUBLIC_PARAM.toString(), "RESPONSE");
+//		if (!paramService.isPublicParamInitial(responseValue)) {
+//			paramService.batchSave(getParams(docProperties.getResponseParamPath()));
+//		}
 	}
 
 	private List<Param> getParams(String filePath) {
@@ -64,7 +78,7 @@ public class DocInitializer {
 		jsonReader.startArray();
 		while (jsonReader.hasNext()) {
 			Param param = jsonReader.readObject(Param.class);
-			param.setSeq(IdGenerator.getNewId());
+			param.setSeq(ID.getNewId());
 			params.add(param);
 		}
 		jsonReader.endArray();

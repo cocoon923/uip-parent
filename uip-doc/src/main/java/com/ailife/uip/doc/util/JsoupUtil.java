@@ -69,9 +69,9 @@ public class JsoupUtil {
 
 	private static List<Param> getParamsFromTable(Element element, boolean isReq) {
 		List<Param> params = new ArrayList<Param>();
-		Param previousParam = isReq ? StaticDataUtil.getReqRootParam() : StaticDataUtil.getRespRootParam();
+		Param previousParam = null;/*isReq ? StaticDataUtil.getReqRootParam() : StaticDataUtil.getRespRootParam();*/
 		String paramTypeName = isReq ? "REQUEST" : "RESPONSE";
-		String paramType = StaticDataUtil.getStaticDataValue(DATATYPE.PARAM_TYPE.toString(), paramTypeName);
+		String paramType = "";/*StaticDataUtil.getStaticDataValue(DATATYPE.PARAM_TYPE.toString(), paramTypeName);*/
 		params.add(previousParam);
 		Stack<Param> stack = new Stack<Param>();
 		stack.push(previousParam);
@@ -96,13 +96,13 @@ public class JsoupUtil {
 				if (StringUtils.isNullorEmpty(paramName)) {
 					paramName = paramCode;
 				}
-				if (!StaticDataUtil.getStaticData(DATATYPE.PARAM_CLAZZ.toString()).values().contains(paramClazz)) {
-					paramClazz = "";
-				}
+//				if (!StaticDataUtil.getStaticData(DATATYPE.PARAM_CLAZZ.toString()).values().contains(paramClazz)) {
+//					paramClazz = "";
+//				}
 				//TODO doValidate();
 
 				Param param = new Param();
-				param.setSeq(IdGenerator.getNewId());
+				param.setSeq(ID.getNewId());
 				param.setParamName(paramName);
 				param.setParamCode(paramCode);
 				param.setParamClazz(paramClazz);

@@ -1,0 +1,139 @@
+[
+    {
+        "paramName": "AppKey",
+        "paramCode": "AppKey",
+        "paramTimes": "?",
+        "sort": 1,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    },
+    {
+        "paramName": "API接口名称",
+        "paramCode": "BusiCode",
+        "paramTimes": "1",
+        "sort": 2,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    },
+    {
+        "paramName": "交易流水号",
+        "paramCode": "TransactionID",
+        "paramTimes": "?",
+        "sort": 3,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    },
+    {
+        "paramName": "请求时间",
+        "paramCode": "ReqTime",
+        "paramTimes": "?",
+        "sort": 4,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    },
+    {
+        "paramName": "签名字符串",
+        "paramCode": "Sign",
+        "paramTimes": "?",
+        "sort": 5,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    },
+    {
+        "paramName": "AccessToken",
+        "paramCode": "AccessToken",
+        "paramTimes": "?",
+        "sort": 6,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    },
+    {
+        "paramName": "接口版本",
+        "paramCode": "Version",
+        "paramTimes": "?",
+        "sort": 7,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    },
+    {
+        "paramName": "落地方系统",
+        "paramCode": "DstSysID",
+        "paramTimes": "?",
+        "sort": 8,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    },
+    {
+        "paramName": "租户id",
+        "paramCode": "TenantId",
+        "paramTimes": "?",
+        "sort": 9,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    },
+    {
+        "paramName": "受理地市",
+        "paramCode": "AcceptRegionCode",
+        "paramTimes": "?",
+        "sort": 10,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    },
+    {
+        "paramName": "一次性费用",
+        "paramCode": "ChargeFlag",
+        "paramTimes": "?",
+        "sort": 11,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    },
+    {
+        "paramName": "受理渠道类型",
+        "paramCode": "AcceptChannelType",
+        "paramTimes": "1",
+        "sort": 12,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    },
+    {
+        "paramName": "受理渠道",
+        "paramCode": "AcceptChannelCode",
+        "paramTimes": "?",
+        "sort": 13,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    },
+    {
+        "paramName": "是否发送通知",
+        "paramCode": "NotifyFlag",
+        "paramTimes": "?",
+        "sort": 14,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    },
+    {
+        "seq": 15,
+        "paramName": "受理员工",
+        "paramCode": "AcceptStaffId",
+        "paramValue": "AcceptStaffId",
+        "paramTimes": "1",
+        "sort": 15,
+        "paramType": "0",
+        "remark": "Public Parameter",
+        "parentSeq": -2
+    }
+]

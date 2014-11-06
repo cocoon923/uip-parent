@@ -1,0 +1,56 @@
+[
+    {
+        "paramName": "会话应答代码",
+        "paramCode": "RspCode",
+        "paramTimes": "?",
+        "sort": 1,
+        "paramType": "1",
+        "remark": "Public Parameter",
+        "parentSeq": -3
+    },
+    {
+        "paramName": "会话应答描述",
+        "paramCode": "RspDesc",
+        "paramTimes": "?",
+        "sort": 2,
+        "paramType": "1",
+        "remark": "Public Parameter",
+        "parentSeq": -3
+    },
+    {
+        "paramName": "应答时间",
+        "paramCode": "RspTime",
+        "paramTimes": "?",
+        "sort": 3,
+        "paramType": "1",
+        "remark": "Public Parameter",
+        "parentSeq": -3
+    },
+    {
+        "paramName": "应答流水号",
+        "paramCode": "RspTransactionID",
+        "paramTimes": "?",
+        "sort": 4,
+        "paramType": "1",
+        "remark": "Public Parameter",
+        "parentSeq": -3
+    },
+    {
+        "paramName": "会话应答类型",
+        "paramCode": "RspType",
+        "paramTimes": "?",
+        "sort": 5,
+        "paramType": "1",
+        "remark": "Public Parameter",
+        "parentSeq": -3
+    },
+    {
+        "paramName": "交易流水号",
+        "paramCode": "TransactionID",
+        "paramTimes": "?",
+        "sort": 6,
+        "paramType": "1",
+        "remark": "Public Parameter",
+        "parentSeq": -3
+    }
+]
