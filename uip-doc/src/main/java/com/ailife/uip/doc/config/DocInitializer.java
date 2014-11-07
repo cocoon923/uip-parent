@@ -1,17 +1,13 @@
 package com.ailife.uip.doc.config;
 
 
-import com.ailife.uip.core.entity.Inter;
 import com.ailife.uip.core.entity.Param;
 import com.ailife.uip.core.util.FileUtil;
-import com.ailife.uip.core.util.TikaUtil;
-import com.ailife.uip.doc.svn.IDocService;
+import com.ailife.uip.doc.svn.IDocSVNService;
 import com.ailife.uip.doc.util.ID;
-import com.ailife.uip.doc.util.JsoupUtil;
 import com.alibaba.fastjson.JSONReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.util.IdGenerator;
 
 import javax.annotation.PostConstruct;
 import java.io.InputStream;
@@ -31,7 +27,7 @@ public class DocInitializer {
 	private ConfigurableApplicationContext applicationContext;
 
 	@Autowired
-	private IDocService docService;
+	private IDocSVNService docService;
 
 
 	@PostConstruct

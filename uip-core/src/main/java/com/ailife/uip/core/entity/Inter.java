@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by chenmm on 9/28/2014.
  */
-public class Inter implements Serializable {
+public class Inter extends JsonBean<Inter> implements Serializable {
 
 	private String seq;
 	private String interName;
@@ -32,6 +32,11 @@ public class Inter implements Serializable {
 		this.invokeMethod = invokeMethod;
 		this.sort = sort;
 		this.remark = remark;
+	}
+
+	@Override
+	protected Inter getT() {
+		return this;
 	}
 
 	public String getSeq() {

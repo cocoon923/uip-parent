@@ -5,8 +5,7 @@ import java.io.Serializable;
 /**
  * Created by chenmm on 9/28/2014.
  */
-
-public class Param implements Serializable {
+public class Param extends JsonBean<Param> implements Serializable {
 
 	private String seq;
 	private String paramName;
@@ -33,6 +32,11 @@ public class Param implements Serializable {
 		this.paramType = paramType;
 		this.remark = remark;
 		this.parentSeq = parentSeq;
+	}
+
+	@Override
+	protected Param getT() {
+		return this;
 	}
 
 	public String getSeq() {

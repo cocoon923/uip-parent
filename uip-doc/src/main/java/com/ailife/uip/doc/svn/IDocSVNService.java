@@ -3,7 +3,7 @@ package com.ailife.uip.doc.svn;
 /**
  * Created by chenmm6 on 2014/11/4.
  */
-public interface IDocService {
+public interface IDocSVNService {
 
 	public void checkoutDoc();
 

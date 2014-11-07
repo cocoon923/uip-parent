@@ -14,7 +14,7 @@ import java.io.File;
  * Created by chenmm6 on 2014/11/4.
  */
 @Service
-public class DocServiceImpl implements IDocService {
+public class DocSVNServiceImpl implements IDocSVNService {
 
 	@Autowired
 	private SVNClientManager svnClientManager;

@@ -1,9 +1,11 @@
 package com.ailife.uip.core.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by chenmm6 on 2014/10/30.
  */
-public class ItemRelat {
+public class ItemRelat extends JsonBean<ItemRelat> implements Serializable {
 
 	private String seq;
 	private String itemSeq;
@@ -20,6 +22,11 @@ public class ItemRelat {
 		this.relatItemSeq = relatItemSeq;
 		this.itemType = itemClazz.getName();
 		this.relatItemType = relatItemClazz.getName();
+	}
+
+	@Override
+	protected ItemRelat getT() {
+		return this;
 	}
 
 	public String getSeq() {
