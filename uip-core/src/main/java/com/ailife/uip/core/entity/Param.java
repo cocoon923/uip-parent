@@ -39,6 +39,10 @@ public class Param extends JsonBean<Param> implements Serializable {
 		return this;
 	}
 
+	public static Param toBean(String json) {
+		return JsonBean.toBean(json, Param.class);
+	}
+
 	public String getSeq() {
 		return seq;
 	}

@@ -39,6 +39,10 @@ public class Inter extends JsonBean<Inter> implements Serializable {
 		return this;
 	}
 
+	public static Inter toBean(String json) {
+		return JsonBean.toBean(json, Inter.class);
+	}
+
 	public String getSeq() {
 		return seq;
 	}

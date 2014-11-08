@@ -2,8 +2,10 @@ package com.ailife.uip.doc.redis;
 
 import com.ailife.uip.core.entity.Inter;
 import com.ailife.uip.core.entity.ItemRelat;
+import com.ailife.uip.core.entity.JsonBean;
 import com.ailife.uip.core.entity.Param;
 import com.ailife.uip.core.util.LogUtil;
+import com.ailife.uip.core.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,31 @@ public class DocRedisServiceImpl implements IDocRedisService {
 
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
+
+	@Override
+	public void saveRootParam(Param root) {
+		if (!isRootParam(root)) {
+			LogUtil.error(this.getClass(), "Param is not root param");
+			return;
+		}
+		String rootParamKey = getRootParamKey(root);
+		if (StringUtils.isNullorEmpty(rootParamKey)) {
+			LogUtil.error(this.getClass(), "Param info error! -> ", root.toString());
+		}
+
+		String rootParamValue = stringRedisTemplate.opsForValue().getAndSet(rootParamKey, root.toJSON());
+		if (StringUtils.isNullorEmpty(rootParamValue)) {
+			LogUtil.debug(this.getClass(), "Save root Param! -> " + root.toString());
+		} else {
+			if (!Param.toBean(rootParamValue).equals(root)) {
+				LogUtil.debug(this.getClass(), "Update root Param! -> " + root.toString());
+			}
+		}
+	}
+
+	private boolean isRootParam(Param root) {
+		return (root != null && "-1".equals(root.getParentSeq()));
+	}
 
 	@Override
 	public void saveParam(Param param) {
