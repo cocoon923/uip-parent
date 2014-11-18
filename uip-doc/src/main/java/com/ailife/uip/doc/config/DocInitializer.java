@@ -3,6 +3,7 @@ package com.ailife.uip.doc.config;
 
 import com.ailife.uip.core.entity.Param;
 import com.ailife.uip.core.util.FileUtil;
+import com.ailife.uip.doc.redis.IDocRedisService;
 import com.ailife.uip.doc.svn.IDocSVNService;
 import com.ailife.uip.doc.util.ID;
 import com.alibaba.fastjson.JSONReader;
@@ -13,6 +14,7 @@ import javax.annotation.PostConstruct;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,11 +31,14 @@ public class DocInitializer {
 	@Autowired
 	private IDocSVNService docService;
 
+	@Autowired
+	private IDocRedisService docRedisService;
+
 
 	@PostConstruct
 	protected void initialize() throws Exception {
 		checkoutDoc();
-		initialPublicParams();
+		initialStaticParams();
 		initialDocument();
 	}
 
@@ -50,21 +55,15 @@ public class DocInitializer {
 //		List<Inter> interList = JsoupUtil.parseHtml(TikaUtil.parse(inputStream));
 	}
 
-	private void initialPublicParams() {
-//		String rootValue = StaticDataUtil.getStaticDataValue(DATATYPE.PUBLIC_PARAM.toString(), "ROOT");
-//		if (!paramService.isPublicParamInitial(rootValue)) {
-//			paramService.batchSave(getParams(docProperties.getRootParamPath()));
-//		}
-//
-//		String requestValue = StaticDataUtil.getStaticDataValue(DATATYPE.PUBLIC_PARAM.toString(), "REQUEST");
-//		if (!paramService.isPublicParamInitial(requestValue)) {
-//			paramService.batchSave(getParams(docProperties.getRequestParamPath()));
-//		}
-//
-//		String responseValue = StaticDataUtil.getStaticDataValue(DATATYPE.PUBLIC_PARAM.toString(), "RESPONSE");
-//		if (!paramService.isPublicParamInitial(responseValue)) {
-//			paramService.batchSave(getParams(docProperties.getResponseParamPath()));
-//		}
+	private void initialStaticParams() {
+		List<Param> staticParams = Collections.emptyList();
+		staticParams.addAll(getParams(docProperties.getRootParamPath()));
+		staticParams.addAll(getParams(docProperties.getRequestParamPath()));
+		staticParams.addAll(getParams(docProperties.getResponseParamPath()));
+		for (Param param : staticParams){
+			param.setSeq(ID.getNewId());
+			docRedisService.saveParam(param);
+		}
 	}
 
 	private List<Param> getParams(String filePath) {

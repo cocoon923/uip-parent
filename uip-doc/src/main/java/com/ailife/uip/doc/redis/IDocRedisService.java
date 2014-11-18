@@ -10,12 +10,8 @@ import java.util.List;
  */
 public interface IDocRedisService {
 
-	public void saveRootParam(Param root);
-
 	public void saveParam(Param param);
 
 	public void saveInter(Inter inter);
-
-	public void batchSaveParam(List<Param> params);
 
 }

@@ -22,7 +22,7 @@ public class RedisKey {
 	}
 
 	public static String getParamMappingKey(Param param) {
-		return wrapAll(join(PARAM, MAPPING, param.getParamCode(), param.getParamType()));
+		return wrapAll(join(PARAM, MAPPING, param.getParamCode(), param.getParamType(), param.getParentSeq()));
 	}
 
 	public static String getRootParamKey(Param param) {
