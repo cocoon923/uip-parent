@@ -16,6 +16,8 @@ public abstract class JsonBean<T> implements Json {
 
     protected abstract T getT();
 
+    public abstract String getSeq();
+
     @Override
     public String toJSON() {
         Field[] fields = getT().getClass().getDeclaredFields();
@@ -26,6 +28,11 @@ public abstract class JsonBean<T> implements Json {
             }
         }
         return JSONObject.toJSONString(getT(), new SimplePropertyPreFilter(list.toArray(new String[list.size()])));
+    }
+
+    @Override
+    public JSONObject toJSONObject() {
+        return JSON.parseObject(toJSON());
     }
 
     protected static <T extends Json> T toBean(String json, Class<T> clz) {
