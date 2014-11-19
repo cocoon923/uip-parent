@@ -8,5 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 public interface Json {
 
 	public String toJSON();
-	
+
+	public JSONObject toJSONObject();
+
 }
