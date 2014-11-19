@@ -2,10 +2,13 @@ package com.ailife.uip.doc.redis;
 
 import com.ailife.uip.core.entity.Inter;
 import com.ailife.uip.core.entity.ItemRelat;
+import com.ailife.uip.core.entity.JsonBean;
 import com.ailife.uip.core.entity.Param;
 import com.ailife.uip.core.util.LogUtil;
 import com.ailife.uip.core.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundHashOperations;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +35,8 @@ public class DocRedisServiceImpl implements IDocRedisService {
 				this.saveRootParam(param);
 				return;
 			}
-			//3-1 Save Param detail infomation.
-			stringRedisTemplate.opsForValue().set(getParamKey(param.getSeq()), param.toJSON());
+			//3-1 Save Param detail information.
+			stringRedisTemplate.opsForValue().set(getDetailKey(param), param.toJSON());
 			//3-2 Add Param to param pool.
 			stringRedisTemplate.opsForSet().add(PARAM_POOL_KEY, param.getSeq());
 			//3-3 Mapping paramCode/paramType/parentSeq to paramSeq;
@@ -46,14 +49,14 @@ public class DocRedisServiceImpl implements IDocRedisService {
 	@Override
 	public void saveInter(Inter inter) {
 		//1. Save inter and add to inter pool.
-		stringRedisTemplate.opsForValue().set(getInterKey(inter.getSeq()), inter.toJSON());
+		stringRedisTemplate.opsForValue().set(getDetailKey(inter), inter.toJSON());
 		stringRedisTemplate.opsForSet().add(INTER_POOL_KEY, inter.getSeq());
 
 		//2. Save params and add to param pool.
 		Map<String, String> paramMap = new HashMap<String, String>();
 		List<String> paramSeqList = new ArrayList<String>();
 		for (Param param : inter.getParams()) {
-			paramMap.put(getParamKey(param.getSeq()), param.toJSON());
+			paramMap.put(getDetailKey(param), param.toJSON());
 			paramSeqList.add(param.getSeq());
 		}
 		stringRedisTemplate.opsForValue().multiSet(paramMap);
@@ -99,10 +102,15 @@ public class DocRedisServiceImpl implements IDocRedisService {
 		Map<String, String> paramMap = new HashMap<String, String>();
 		List<String> paramSeqList = new ArrayList<String>();
 		for (Param param : params) {
-			paramMap.put(getParamKey(param.getSeq()), param.toJSON());
+			paramMap.put(getDetailKey(param), param.toJSON());
 			paramSeqList.add(param.getSeq());
 		}
 		stringRedisTemplate.opsForValue().multiSet(paramMap);
 		stringRedisTemplate.opsForSet().add(PARAM_POOL_KEY, paramSeqList.toArray(new String[paramSeqList.size()]));
+	}
+
+	private void saveJsonBean(JsonBean jsonBean){
+		BoundHashOperations<String, String, Object> operations = stringRedisTemplate.boundHashOps(getDetailKey(jsonBean));
+		operations.putAll(jsonBean.toJSONObject());
 	}
 }
